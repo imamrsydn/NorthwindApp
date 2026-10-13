@@ -1,0 +1,1 @@
+Scaffold-DbContext "Server=DESKTOP-K9UDAK1;Database=Northwind_3;user=sa;password=Indocyber.100;TrustServerCertificate=True" Microsoft.EntityFrameWorkCore.SqlServer -Output Models -force

@@ -1,0 +1,29 @@
+{
+  "username": "administrator",
+  "password": "1234567890",
+  "secretKey": "Northwind-API-Training-Super-Secret-Key-2026!",
+  "subject": "administrator",
+  "audience": "NorthwindClient"
+}
+
+// Admin Token
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFkbWluaXN0cmF0b3IiLCJyb2xlIjoiU3VwZXJBZG1pbiIsImVtYWlsIjoiYWRtaW5pc3RyYXRvckBub3J0aHdpbmQuY29tIiwibmJmIjoxNzkwOTI0MDQ0LCJleHAiOjE3OTA5MzEyNDQsImlhdCI6MTc5MDkyNDA0NCwiaXNzIjoiTm9ydGh3aW5kQVBJIiwiYXVkIjoiTm9ydGh3aW5kQ2xpZW50In0.HuHC8VC2ePPqkYz8daaVKiWs0q-gqfyqRfKZglc1Ko4
+
+// Employee Token
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6ImFuZHJldyIsInJvbGUiOiJFbXBsb3llZSIsImVtYWlsIjoiaW1hbS5wcmFzZXR5b0BpbmRvY3liZXIuaWQiLCJFbXBsb3llZUlkIjoiMiIsIm5iZiI6MTc5MDg0MTY3MiwiZXhwIjoxNzkwODQ4ODcyLCJpYXQiOjE3OTA4NDE2NzIsImlzcyI6Ik5vcnRod2luZEFQSSIsImF1ZCI6Ik5vcnRod2luZENsaWVudCJ9.bc5z2vWwzmyHKNdMI-u4hPAMVVN_rKgoWDna3p6j6ik
+
+// Customer Token
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1bmlxdWVfbmFtZSI6Im1hcmlhX2FuZGVycyIsInJvbGUiOiJDdXN0b21lciIsImVtYWlsIjoiYWxma2lAbm9ydGh3aW5kLmNvbSIsIkN1c3RvbWVySWQiOiJBTEZLSSIsIm5iZiI6MTc5MDg0MjExMSwiZXhwIjoxNzkwODQ5MzExLCJpYXQiOjE3OTA4NDIxMTEsImlzcyI6Ik5vcnRod2luZEFQSSIsImF1ZCI6Ik5vcnRod2luZENsaWVudCJ9.8R7Xe9bQy25P7aSmOCG83faX9GYD3jYvPUWj3wf9204
+
+
+
+
+
+
+
+
+
+
+
+
+

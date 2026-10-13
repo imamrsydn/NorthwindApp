@@ -1,0 +1,8 @@
+<Solution>
+  <Project Path="Northwind.API/Northwind.API.csproj" />
+  <Project Path="Northwind.CLI/Northwind.CLI.csproj" />
+  <Project Path="Northwind.DbAccess/Northwind.DbAccess.csproj" />
+  <Project Path="Northwind.Provider/Northwind.Provider.csproj" />
+  <Project Path="Northwind.Repository/Northwind.Repository.csproj" />
+  <Project Path="Northwind.ViewModel/Northwind.ViewModel.csproj" />
+</Solution>
