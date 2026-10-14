@@ -22,7 +22,13 @@ namespace Northwind.Provider.Implementations
             var res = regions.Select(r => new RegionResponseDto
             {
                 RegionId = r.RegionId,
-                RegionDescription = r.RegionDescription.Trim()
+                RegionDescription = r.RegionDescription.Trim(),
+                ListTerritory = r.Territories?.Select(t => new TerritoryResponseDto
+                {
+                    TerritoryId = t.TerritoryId,
+                    TerritoryDescription = t.TerritoryDescription.Trim(),
+                    RegionId = t.RegionId
+                }).ToList() ?? []
             }).ToList();
 
             return ApiResponse<List<RegionResponseDto>>.SuccessResult(res);
@@ -34,7 +40,13 @@ namespace Northwind.Provider.Implementations
             var dtos = items.Select(r => new RegionResponseDto
             {
                 RegionId = r.RegionId,
-                RegionDescription = r.RegionDescription.Trim()
+                RegionDescription = r.RegionDescription.Trim(),
+                ListTerritory = r.Territories?.Select(t => new TerritoryResponseDto
+                {
+                    TerritoryId = t.TerritoryId,
+                    TerritoryDescription = t.TerritoryDescription.Trim(),
+                    RegionId = t.RegionId
+                }).ToList() ?? []
             }).ToList();
 
             var result = new PagedResultDto<RegionResponseDto>(dtos, totalCount, filter.PageIndex, filter.PageSize);
@@ -49,7 +61,13 @@ namespace Northwind.Provider.Implementations
             return ApiResponse<RegionResponseDto>.SuccessResult(new RegionResponseDto
             {
                 RegionId = r.RegionId,
-                RegionDescription = r.RegionDescription.Trim()
+                RegionDescription = r.RegionDescription.Trim(),
+                ListTerritory = r.Territories?.Select(t => new TerritoryResponseDto
+                {
+                    TerritoryId = t.TerritoryId,
+                    TerritoryDescription = t.TerritoryDescription.Trim(),
+                    RegionId = t.RegionId
+                }).ToList() ?? []
             });
         }
 

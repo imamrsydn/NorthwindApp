@@ -16,12 +16,12 @@ namespace Northwind.Repository.Implementations
 
         public async Task<List<Region>> GetAllAsync()
         {
-            return await _context.Regions.AsNoTracking().ToListAsync();
+            return await _context.Regions.Include(r => r.Territories).AsNoTracking().ToListAsync();
         }
 
         public async Task<(List<Region> Items, int TotalCount)> GetPagedAsync(RegionFilterDto filter)
         {
-            var query = _context.Regions.AsNoTracking().AsQueryable();
+            var query = _context.Regions.Include(r => r.Territories).AsNoTracking().AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(filter.SearchKeyword))
             {
@@ -42,11 +42,16 @@ namespace Northwind.Repository.Implementations
 
         public async Task<Region?> GetByIdAsync(int id)
         {
-            return await _context.Regions.FindAsync(id);
+            return await _context.Regions
+                .Include(r => r.Territories)
+                .SingleOrDefaultAsync(r => r.RegionId == id);
         }
 
         public async Task AddAsync(Region region)
         {
+            var lastRegion = _context.Regions.OrderBy(r => r.RegionId).Last();
+            var lastId = lastRegion.RegionId;
+            region.RegionId = lastId + 1;
             await _context.Regions.AddAsync(region);
         }
 
