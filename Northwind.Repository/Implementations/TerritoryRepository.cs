@@ -16,7 +16,7 @@ namespace Northwind.Repository.Implementations
 
         public async Task<List<Territory>> GetTerritoriesAsync(int? regionId)
         {
-            var q = _context.Territories.AsNoTracking().Include(t => t.Region).AsQueryable();
+            var q = _context.Territories.AsNoTracking().Include(t => t.Region).Include(t => t.Employees).AsQueryable();
             if (regionId.HasValue) q = q.Where(t => t.RegionId == regionId.Value);
             return await q.ToListAsync();
         }
@@ -26,6 +26,7 @@ namespace Northwind.Repository.Implementations
             var query = _context.Territories
                 .AsNoTracking()
                 .Include(t => t.Region)
+                .Include(t => t.Employees)
                 .AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(filter.SearchKeyword))
@@ -56,6 +57,7 @@ namespace Northwind.Repository.Implementations
             return await _context.Territories
                 .AsNoTracking()
                 .Include(t => t.Region)
+                .Include(t => t.Employees)
                 .FirstOrDefaultAsync(t => t.TerritoryId.Trim() == id.Trim());
         }
 

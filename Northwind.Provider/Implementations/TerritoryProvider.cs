@@ -3,6 +3,7 @@ using Northwind.Provider.Interfaces;
 using Northwind.Repository.Interfaces;
 using Northwind.ViewModel;
 using Northwind.ViewModel.Auth;
+using Northwind.ViewModel.Employee;
 using Northwind.ViewModel.Territory;
 
 namespace Northwind.Provider.Implementations
@@ -24,7 +25,13 @@ namespace Northwind.Provider.Implementations
                 TerritoryId = t.TerritoryId.Trim(),
                 TerritoryDescription = t.TerritoryDescription.Trim(),
                 RegionId = t.RegionId,
-                RegionDescription = t.Region != null ? t.Region.RegionDescription.Trim() : string.Empty
+                RegionDescription = t.Region != null ? t.Region.RegionDescription.Trim() : string.Empty,
+                Employees = t.Employees?.Select(t => new EmployeeResponseDto
+                {
+                    EmployeeId = t.EmployeeId,
+                    FirstName = t.FirstName,
+                    LastName = t.LastName
+                }).ToList() ?? []
             }).ToList();
 
             return ApiResponse<List<TerritoryResponseDto>>.SuccessResult(res);
@@ -38,7 +45,13 @@ namespace Northwind.Provider.Implementations
                 TerritoryId = t.TerritoryId.Trim(),
                 TerritoryDescription = t.TerritoryDescription.Trim(),
                 RegionId = t.RegionId,
-                RegionDescription = t.Region != null ? t.Region.RegionDescription.Trim() : string.Empty
+                RegionDescription = t.Region != null ? t.Region.RegionDescription.Trim() : string.Empty,
+                Employees = t.Employees?.Select(t => new EmployeeResponseDto
+                {
+                    EmployeeId = t.EmployeeId,
+                    FirstName = t.FirstName,
+                    LastName = t.LastName
+                }).ToList() ?? []
             }).ToList();
 
             var result = new PagedResultDto<TerritoryResponseDto>(dtos, totalCount, filter.PageIndex, filter.PageSize);
@@ -55,7 +68,13 @@ namespace Northwind.Provider.Implementations
                 TerritoryId = t.TerritoryId.Trim(),
                 TerritoryDescription = t.TerritoryDescription.Trim(),
                 RegionId = t.RegionId,
-                RegionDescription = t.Region != null ? t.Region.RegionDescription.Trim() : string.Empty
+                RegionDescription = t.Region != null ? t.Region.RegionDescription.Trim() : string.Empty,
+                Employees = t.Employees?.Select(t => new EmployeeResponseDto
+                {
+                    EmployeeId = t.EmployeeId,
+                    FirstName = t.FirstName,
+                    LastName = t.LastName
+                }).ToList() ?? []
             });
         }
 
