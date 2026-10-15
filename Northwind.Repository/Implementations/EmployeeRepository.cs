@@ -40,7 +40,11 @@ namespace Northwind.Repository.Implementations
 
         public async Task<(List<Employee> Items, int TotalCount)> GetPagedAsync(EmployeeFilterDto filter)
         {
-            var query = _context.Employees.AsNoTracking().AsQueryable();
+            var query = _context.Employees
+                .Include(e => e.ReportsToNavigation)
+                .Include(e => e.Territories)
+                .AsNoTracking()
+                .AsQueryable();
 
             if (!string.IsNullOrWhiteSpace(filter.SearchKeyword))
             {
@@ -74,6 +78,7 @@ namespace Northwind.Repository.Implementations
         {
             return await _context.Employees
                 .Include(e => e.ReportsToNavigation)
+                .Include(e => e.Territories)
                 .FirstOrDefaultAsync(e => e.EmployeeId == id);
         }
 

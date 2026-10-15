@@ -21,5 +21,6 @@
         public int? ReportsTo { get; set; }
         public string? ReportsToName { get; set; }
         public string? PhotoPath { get; set; }
+        public int TotalTerritory { get; set; }
     }
 }

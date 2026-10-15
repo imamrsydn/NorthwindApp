@@ -177,7 +177,8 @@ namespace Northwind.Provider.Implementations
             ReportsToName = emp.ReportsToNavigation != null
                 ? $"{emp.ReportsToNavigation.FirstName} {emp.ReportsToNavigation.LastName}"
                 : null,
-            PhotoPath = emp.PhotoPath
+            PhotoPath = emp.PhotoPath,
+            TotalTerritory = emp.Territories.Count
         };
     }
 }
