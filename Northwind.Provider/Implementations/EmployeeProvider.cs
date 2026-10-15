@@ -4,7 +4,9 @@ using Northwind.Repository.Interfaces;
 using Northwind.ViewModel;
 using Northwind.ViewModel.Auth;
 using Northwind.ViewModel.Employee;
+using Northwind.ViewModel.Order;
 using Northwind.ViewModel.Territory;
+using Northwind.ViewModel.UserAccount;
 
 namespace Northwind.Provider.Implementations
 {
@@ -35,9 +37,10 @@ namespace Northwind.Provider.Implementations
 
         public async Task<ApiResponse<EmployeeDetailDto>> GetEmployeeByIdAsync(int id)
         {
-            var emp = await _employeeRepository.GetByIdWithTerritoriesAsync(id);
+            var emp = await _employeeRepository.GetByIdAsync(id);
             if (emp == null)
                 return ApiResponse<EmployeeDetailDto>.FailureResult("Employee tidak ditemukan.");
+            var u = emp.UserAccounts.FirstOrDefault();
 
             var detail = new EmployeeDetailDto
             {
@@ -61,13 +64,50 @@ namespace Northwind.Provider.Implementations
                     ? $"{emp.ReportsToNavigation.FirstName} {emp.ReportsToNavigation.LastName}"
                     : null,
                 PhotoPath = emp.PhotoPath,
+                TotalTerritory = emp.Territories.Count,
                 Territories = emp.Territories.Select(t => new TerritoryResponseDto
                 {
                     TerritoryId = t.TerritoryId.Trim(),
                     TerritoryDescription = t.TerritoryDescription.Trim(),
                     RegionId = t.RegionId,
                     RegionDescription = t.Region.RegionDescription.Trim()
-                }).ToList()
+                }).ToList() ?? [],
+                Members = emp.InverseReportsToNavigation.Select(m => $"{m.FirstName} {m.LastName}").ToList(),
+                Orders = emp.Orders.Select(o => new OrderResponseDto
+                {
+                    OrderId = o.OrderId,
+                    CustomerId = o.CustomerId,
+                    CustomerCompanyName = o.Customer?.CompanyName,
+                    EmployeeId = o.EmployeeId,
+                    EmployeeFullName = o.Employee != null ? $"{o.Employee.FirstName} {o.Employee.LastName}" : null,
+                    OrderDate = o.OrderDate,
+                    RequiredDate = o.RequiredDate,
+                    ShippedDate = o.ShippedDate,
+                    ShipVia = o.ShipVia,
+                    ShipperCompanyName = o.ShipViaNavigation?.CompanyName,
+                    Freight = o.Freight,
+                    ShipName = o.ShipName,
+                    ShipAddress = o.ShipAddress,
+                    ShipCity = o.ShipCity,
+                    ShipRegion = o.ShipRegion,
+                    ShipPostalCode = o.ShipPostalCode,
+                    ShipCountry = o.ShipCountry,
+                    TotalAmount = o.OrderDetails.Sum(od => od.UnitPrice * od.Quantity * (decimal)(1 - od.Discount))
+                }).ToList() ?? [],
+                UserAccounts = emp.UserAccounts != null ? new UserAccountDetailDto
+                {
+                    Username = u.Username,
+                    Email = u.Email,
+                    Role = u.Role,
+                    IsActive = u.IsActive,
+                    CountLog = u.CountLog,
+                    CreatedAt = u.CreatedAt,
+                    UpdatedAt = u.UpdatedAt,
+                    EmployeeId = u.EmployeeId,
+                    EmployeeName = u.Employee != null ? $"{u.Employee.FirstName} {u.Employee.LastName}" : null,
+                    CustomerId = u.CustomerId,
+                    CustomerName = u.Customer?.CompanyName
+                } : null,
             };
 
             return ApiResponse<EmployeeDetailDto>.SuccessResult(detail);

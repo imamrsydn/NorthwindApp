@@ -79,6 +79,10 @@ namespace Northwind.Repository.Implementations
             return await _context.Employees
                 .Include(e => e.ReportsToNavigation)
                 .Include(e => e.Territories)
+                    .ThenInclude(e => e.Region)
+                .Include(e => e.InverseReportsToNavigation)
+                .Include(e => e.Orders)
+                .Include(e => e.UserAccounts)
                 .FirstOrDefaultAsync(e => e.EmployeeId == id);
         }
 
